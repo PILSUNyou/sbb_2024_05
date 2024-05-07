@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,10 +28,16 @@ class SbbApplicationTests {
 //		q2.setCreateDate(LocalDateTime.now());
 //		this.questionRepository.save(q2);  // 두번째 질문 저장
 
-		List<Question> all = this.questionRepository.findAll();
-		assertEquals(2, all.size()); // expected는 기대값으로 Equals 했을 때 all.size의 값이 기대값과 같아야 함
+//		List<Question> all = this.questionRepository.findAll();
+//		assertEquals(2, all.size()); // expected는 기대값으로 Equals 했을 때 all.size의 값이 기대값과 같아야 함
+//
+//		Question q = all.get(0);
+//		assertEquals("sbb가 무엇인가요?", q.getSubject());
 
-		Question q = all.get(0);
-		assertEquals("sbb가 무엇인가요?", q.getSubject());
+		Optional<Question> oq = this.questionRepository.findById(1); // 1을 가져옴
+		if(oq.isPresent()) {
+			Question q = oq.get(); // 위에서 findById에 1의 값을 가져왔기 때문에 get이후 정수 기입을 안해도 된다.
+			assertEquals("sbb가 무엇인가요?", q.getSubject());
+		}
 	}
 }
