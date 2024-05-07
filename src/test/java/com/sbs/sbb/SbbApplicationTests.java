@@ -1,9 +1,11 @@
 package com.sbs.sbb;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,6 +20,7 @@ class SbbApplicationTests {
 	@Autowired
 	private AnswerRepository  answerRepository;
 
+	@Transactional
 	@Test
 	void testJpa() {
 //		Question q1 = new Question();
@@ -84,9 +87,19 @@ class SbbApplicationTests {
 //		this.answerRepository.save(a);
 
 		// 질문 데이터 조회하기
-		Optional<Answer> oa = this.answerRepository.findById(1);
-		assertTrue(oa.isPresent());
-		Answer a = oa.get();
-		assertEquals(2, a.getQuestion().getId());
+//		Optional<Answer> oa = this.answerRepository.findById(1);
+//		assertTrue(oa.isPresent());
+//		Answer a = oa.get();
+//		assertEquals(2, a.getQuestion().getId());
+
+		// 질문 데이터를 통해 답변 데이터 조회하기
+		Optional<Question> oq = this.questionRepository.findById(2);
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
+
+		List<Answer> answerList = q.getAnswerList();
+
+		assertEquals(1, answerList.size());
+		assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
 	}
 }
