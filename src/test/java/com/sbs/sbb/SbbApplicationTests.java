@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -28,16 +26,24 @@ class SbbApplicationTests {
 //		q2.setCreateDate(LocalDateTime.now());
 //		this.questionRepository.save(q2);  // 두번째 질문 저장
 
+		// findAll 사용
 //		List<Question> all = this.questionRepository.findAll();
 //		assertEquals(2, all.size()); // expected는 기대값으로 Equals 했을 때 all.size의 값이 기대값과 같아야 함
 //
 //		Question q = all.get(0);
 //		assertEquals("sbb가 무엇인가요?", q.getSubject());
 
-		Optional<Question> oq = this.questionRepository.findById(1); // 1을 가져옴
-		if(oq.isPresent()) {
-			Question q = oq.get(); // 위에서 findById에 1의 값을 가져왔기 때문에 get이후 정수 기입을 안해도 된다.
-			assertEquals("sbb가 무엇인가요?", q.getSubject());
-		}
+		// findById 사용
+		// Optional을 사용할 경우 get을 사용하여야 한다
+	//		Optional<Question> oq = this.questionRepository.findById(1); // 1을 가져옴
+	//		if(oq.isPresent()) {
+	//			Question q = oq.get(); // 위에서 findById에 1의 값을 가져왔기 때문에 get이후 정수 기입을 안해도 된다.
+	//			assertEquals("sbb가 무엇인가요?", q.getSubject());
+	//		}
+
+		// findBySubject 사용
+		// Optional을 사용하지 않을 경우는 Question으로 받으면 된다.
+		Question q = this.questionRepository.findBySubject("sbb가 무엇인가요?");
+		assertEquals(1, q.getId());
 	}
 }
