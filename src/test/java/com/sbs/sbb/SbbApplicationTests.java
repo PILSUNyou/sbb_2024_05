@@ -43,7 +43,13 @@ class SbbApplicationTests {
 
 		// findBySubject 사용
 		// Optional을 사용하지 않을 경우는 Question으로 받으면 된다.
-		Question q = this.questionRepository.findBySubject("sbb가 무엇인가요?");
+
+//		Question q = this.questionRepository.findBySubject("sbb가 무엇인가요?");
+//		assertEquals(1, q.getId());
+
+		// findBySubjectAndContent 사용
+		Question q = this.questionRepository.findBySubjectAndContent(
+				"sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다.");
 		assertEquals(1, q.getId());
 	}
 }
