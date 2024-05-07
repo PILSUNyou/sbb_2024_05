@@ -1,24 +1,22 @@
 package com.sbs.sbb;
 
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-@Transactional
 //@Rollback(true)
 class SbbApplicationTests {
 
 	@Autowired // 객체 생성을 대신 해주는 녀석
 	private QuestionRepository questionRepository;
+	@Autowired
+	private AnswerRepository  answerRepository;
 
 	@Test
 	void testJpa() {
@@ -67,11 +65,28 @@ class SbbApplicationTests {
 //		this.questionRepository.save(q);
 
 		// 질문 데이터 삭제하기
-		assertEquals(2, this.questionRepository.count());
-		Optional<Question> oq = this.questionRepository.findById(1);
-		assertTrue(oq.isPresent());
-		Question q = oq.get();
-		this.questionRepository.delete(q);
-		assertEquals(1, this.questionRepository.count());
+//		assertEquals(2, this.questionRepository.count());
+//		Optional<Question> oq = this.questionRepository.findById(1);
+//		assertTrue(oq.isPresent());
+//		Question q = oq.get();
+//		this.questionRepository.delete(q);
+//		assertEquals(1, this.questionRepository.count());
+
+		// 질문 데이터 저장하기
+//		Optional<Question> oq = this.questionRepository.findById(2);
+//		assertTrue(oq.isPresent());
+//		Question q = oq.get();
+//
+//		Answer a = new Answer();
+//		a.setContent("네 자동으로 생성됩니다.");
+//		a.setQuestion(q);  // 어떤 질문의 답변인지 알기위해서 Question 객체가 필요하다.
+//		a.setCreateDate(LocalDateTime.now());
+//		this.answerRepository.save(a);
+
+		// 질문 데이터 조회하기
+		Optional<Answer> oa = this.answerRepository.findById(1);
+		assertTrue(oa.isPresent());
+		Answer a = oa.get();
+		assertEquals(2, a.getQuestion().getId());
 	}
 }
