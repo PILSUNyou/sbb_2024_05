@@ -11,15 +11,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td th:text="${questionList[1].id}"></td>
-        <td th:text="${questionList[1].subject}"></td>
-        <td th:text="${questionList[1].createDate}"></td>
-    </tr>
-    <tr>
-        <td>[[${questionList[0].id}]]</td>
-        <td>[[${questionList[0].subject}]]</td>
-        <td>[[${questionList[0].createDate}]]</td>
-    </tr>
+<!--    each는 향상된 반복문 !-->
+        <tr th:each="q : ${questionList}">
+            <td th:text="${q.id}"></td>
+            <td th:text="${q.subject}"></td>
+            <td th:text="${q.createDate}"></td>
+        </tr>
     </tbody>
 </table>
