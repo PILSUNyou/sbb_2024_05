@@ -3,3 +3,13 @@
     <div th:text="${question.subject}"></div>
     <div th:text="${question.content}"></div>
 </h2>
+
+<form th:action="@{|/answer/create/${question.id}|}" method="post">
+    <div>
+        <span>내용</span>
+        <br>
+        <textarea name="content" placeholder="내용" rows="5"></textarea>
+<!--placeholder는 아무것도 안 썻을 때 무엇이 나올 것인지.-->
+    </div>
+    <button type="submit">답변등록</button>
+</form>
