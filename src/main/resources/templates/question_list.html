@@ -1,4 +1,4 @@
-<h1 style="color: green;">[[${questionList}]]</h1>
+<!--<h1 style="color: green;">[[${questionList}]]</h1>-->
 
 <h2>Hello Template!</h2>
 
@@ -12,14 +12,14 @@
     </thead>
     <tbody>
 <!--    each는 향상된 반복문 !-->
-        <tr th:each="q : ${questionList}">
+        <tr th:each="question : ${questionList}">
             <td>
-                <a th:text="${q.id}" th:href="@{|/question/detail/${question.id}|}"></a>
+                <a th:text="${question.id}" th:href="@{|/question/detail/${question.id}|}"></a>
             </td>
             <td>
-                <a th:text="${q.subject}" th:href="@{|/question/detail/${question.id}|}"></a>
+                <a th:text="${question.subject}" th:href="@{|/question/detail/${question.id}|}"></a>
             </td>
-            <td th:text="${q.createDate}"></td>
+            <td th:text="${question.createDate}"></td>
         </tr>
     </tbody>
 </table>
