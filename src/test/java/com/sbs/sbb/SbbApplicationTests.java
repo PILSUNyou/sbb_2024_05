@@ -1,5 +1,9 @@
 package com.sbs.sbb;
 
+import com.sbs.sbb.answer.Answer;
+import com.sbs.sbb.answer.AnswerRepository;
+import com.sbs.sbb.question.Question;
+import com.sbs.sbb.question.QuestionRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +22,12 @@ class SbbApplicationTests {
 	@Autowired // 객체 생성을 대신 해주는 녀석
 	private QuestionRepository questionRepository;
 	@Autowired
-	private AnswerRepository  answerRepository;
+	private AnswerRepository answerRepository;
 
 	@Transactional
 	@Test
 	void testJpa() {
+		// 질문을 생성
 //		Question q1 = new Question();
 //		q1.setSubject("sbb가 무엇인가요?");
 //		q1.setContent("sbb에 대해서 알고 싶습니다.");
@@ -96,7 +101,9 @@ class SbbApplicationTests {
 		Optional<Question> oq = this.questionRepository.findById(2);
 		assertTrue(oq.isPresent());
 		Question q = oq.get();
-
+		// oq에서 데이터가 끊어지기 때문에 @Transactional을 사용하여 oq의 데이터가 유지될 수 있도록 한다.
+		// 테스트 => fetch = FetchType.LAZY가 기본 타입이 때문에 데이터가 끊어진다.(@Transactional을 사용하면 데이터가 유지된다)
+		// 실제 => fetch = FetchType.EAGER을 사용하여 데이터가 유지되게끔 한다.
 		List<Answer> answerList = q.getAnswerList();
 
 		assertEquals(1, answerList.size());
