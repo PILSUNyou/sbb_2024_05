@@ -13,8 +13,12 @@
     <tbody>
 <!--    each는 향상된 반복문 !-->
         <tr th:each="q : ${questionList}">
-            <td th:text="${q.id}"></td>
-            <td th:text="${q.subject}"></td>
+            <td>
+                <a th:text="${q.id}" th:href="@{|/question/detail/${question.id}|}"></a>
+            </td>
+            <td>
+                <a th:text="${q.subject}" th:href="@{|/question/detail/${question.id}|}"></a>
+            </td>
             <td th:text="${q.createDate}"></td>
         </tr>
     </tbody>
