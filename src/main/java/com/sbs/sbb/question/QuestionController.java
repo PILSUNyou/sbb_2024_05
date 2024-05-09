@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //@RequestMapping("/question") // 접두어에 question을 따로 작성하지 않아도 된다.
+@RequestMapping("/question")
 @Controller
 @RequiredArgsConstructor
 public class QuestionController {
@@ -28,5 +29,10 @@ public class QuestionController {
         model.addAttribute("question",q);
 
         return "question_detail";
+    }
+
+    @GetMapping("/create")
+    public String questionCreate() {
+        return "question_form";
     }
 }
