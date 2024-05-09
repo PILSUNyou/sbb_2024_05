@@ -25,7 +25,7 @@ public class AnswerController {
         // TODO: 답변 객체를 만든다.
         // TODO는 해야할 일을 써넣는 주석이다.
 
-        Answer answer = this.answerService.create(q, content);
+        Answer answer = this.answerService.create(q, content); // 해당 질문에 대한 답변 생성 기능 추가
 
         return "redirect:/question/detail/%d".formatted(id);
     }
