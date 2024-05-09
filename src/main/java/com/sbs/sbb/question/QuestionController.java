@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RequestMapping("/question") // 접두어에 question을 따로 작성하지 않아도 된다.
-@RequestMapping("/question")
+@RequestMapping("/question") // 접두어에 question을 따로 작성하지 않아도 된다.
 @Controller
 @RequiredArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
 
-    @GetMapping("/question/list")
+    @GetMapping("/list")
     public String list(Model model){
         List<Question> questionList = this.questionService.getList();
         model.addAttribute("questionList", questionList);
@@ -22,7 +21,7 @@ public class QuestionController {
         return "question_list";
     }
 
-    @GetMapping("/question/detail/{id}")
+    @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id){
         Question q = this.questionService.getQuestion(id);
 
@@ -34,5 +33,12 @@ public class QuestionController {
     @GetMapping("/create")
     public String questionCreate() {
         return "question_form";
+    }
+
+    @PostMapping("/create")
+    public String questionCreate(@RequestParam(value="subject") String subject, @RequestParam(value="content") String content) {
+        this.questionService.create(subject, content);
+
+        return "redirect:/question/list"; // 질문 저장후 질문목록으로 이동
     }
 }
