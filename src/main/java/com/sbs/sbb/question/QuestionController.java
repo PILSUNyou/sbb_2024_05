@@ -1,11 +1,11 @@
 package com.sbs.sbb.question;
 
+import com.sbs.sbb.answer.AnswerForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,12 +20,13 @@ public class QuestionController {
     @GetMapping("/list")
     public String list(Model model){
         List<Question> questionList = this.questionService.getList();
+        model.addAttribute("questionList", questionList);
 
         return "question_list";
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id){
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm){
         Question q = this.questionService.getQuestion(id);
 
         model.addAttribute("question",q);
@@ -37,7 +38,7 @@ public class QuestionController {
     // QuestionForm 변수는 model.addAttribute 없이 바로 뷰에서 접근할 수 있다.
     // QuestionForm questionForm 써주는 이유 : question_form.html에서 questionForm 변수가 없으면 실행이 안되기 때문에
     // 빈 객체라도 만든다.
-    public String questionCreate(QuestionForm questionForm) {
+    public String Create(QuestionForm questionForm) {
         return "question_form";
     }
 
