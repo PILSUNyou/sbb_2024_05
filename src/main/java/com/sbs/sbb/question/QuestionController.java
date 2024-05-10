@@ -20,7 +20,6 @@ public class QuestionController {
     @GetMapping("/list")
     public String list(Model model){
         List<Question> questionList = this.questionService.getList();
-        model.addAttribute("questionList", questionList);
 
         return "question_list";
     }
@@ -35,12 +34,16 @@ public class QuestionController {
     }
 
     @GetMapping("/create")
-    public String questionCreate() {
+    // QuestionForm 변수는 model.addAttribute 없이 바로 뷰에서 접근할 수 있다.
+    // QuestionForm questionForm 써주는 이유 : question_form.html에서 questionForm 변수가 없으면 실행이 안되기 때문에
+    // 빈 객체라도 만든다.
+    public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
 
     @PostMapping("/create")
     // QuestionForm 값을 바인딩할 때 유효성 체크를 해라 !!
+    // QuestionForm 변수는 model.addAttribute 없이 바로 뷰에서 접근할 수 있다.
     public String questionCreate(@Valid QuestionForm questionForm , BindingResult bindingResult) {
         if ( bindingResult.hasErrors() ) {
             // question_form.html 실행
