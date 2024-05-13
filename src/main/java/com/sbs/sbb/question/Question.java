@@ -32,4 +32,5 @@ public class Question {
     // OneToMany는 선택적으로 작성한다.
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+
 }
