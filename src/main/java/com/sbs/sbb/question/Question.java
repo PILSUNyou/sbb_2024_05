@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +33,8 @@ public class Question {
     // OneToMany는 테이블의 컬럼으로 생성되지 않는다.
     // OneToMany는 선택적으로 작성한다.
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.EXTRA)
+    // answerList.size(); 함수가 실행될 때 SELECT COUNT 실행
     private List<Answer> answerList;
 
 }
