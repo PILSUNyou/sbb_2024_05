@@ -1,6 +1,5 @@
 package com.sbs.sbb;
 
-
 import com.sbs.sbb.answer.Answer;
 import com.sbs.sbb.answer.AnswerRepository;
 import com.sbs.sbb.answer.AnswerService;
