@@ -241,21 +241,21 @@ class SbbApplicationTests {
 		assertEquals("네. 자동으로 생성됩니다.", answerList.get(0).getContent());
 	}
 
-	@Test
-	@DisplayName("대량 테스트 데이터 만들기")
-	void t012() {
-		for ( int i = 1; i <= 300; i++ ) {
-			String subject = String.format("테스트 데이터 입니다.:[%03d]", i);
-			String content = "내용무";
-			this.questionService.create(subject, content);
-		}
-	}
-
-
-	@Test
-	@DisplayName("스트림 버전 데이터 밀어넣기")
-	void t013() {
-		IntStream.rangeClosed(3, 300)
-				.forEach(no -> questionService.create("테스트 제목 입니다. %d".formatted(no),"테스트 내용입니다. %d".formatted(no)));
-	}
+//	@Test
+//	@DisplayName("대량 테스트 데이터 만들기")
+//	void t012() {
+//		for ( int i = 1; i <= 300; i++ ) {
+//			String subject = String.format("테스트 데이터 입니다.:[%03d]", i);
+//			String content = "내용무";
+//			this.questionService.create(subject, content);
+//		}
+//	}
+//
+//
+//	@Test
+//	@DisplayName("스트림 버전 데이터 밀어넣기")
+//	void t013() {
+//		IntStream.rangeClosed(3, 300)
+//				.forEach(no -> questionService.create("테스트 제목 입니다. %d".formatted(no),"테스트 내용입니다. %d".formatted(no)));
+//	}
 }
