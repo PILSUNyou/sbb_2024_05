@@ -33,6 +33,8 @@ public class Question {
     private LocalDateTime createDate; // 날짜
     private LocalDateTime modifyDate;
 
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private int view;
     // maooedBy Answer 클래스의 question 변수 이름을 적어야함.(Answer 클래스에 있는 question이랑 이름이 같아야함.)
     // CascadeType.REMOVE를 하면 Question을 삭제할 때 답변도 함께 삭제한다.
     // OneToMany는 테이블의 컬럼으로 생성되지 않는다.
