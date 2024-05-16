@@ -14,12 +14,17 @@
                         <div th:if="${question.modifyDate == null}" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                         <div th:if="${question.modifyDate != null}" th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
                         <div class="my-3">
+                            <a onclick="return confirm('추천 하시겠습니까 ?');" class="btn btn-sm btn-outline-secondary"
+                               th:href="@{|/question/vote/${question.id}|}">
+                                추천
+                                <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voters)}"></span>
+                            </a>
                             <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm btn-outline-secondary"
                                sec:authorize="isAuthenticated()"
                                th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
                                th:text="수정"></a>
 
-                            <a onclick="return confirm('정말로 삭제하시겠습니까?');" th:href="@{|/question/delete/${question.id}|}"
+                            <a onclick="return confirm('정말로 삭제하시겠습니까 ?');" th:href="@{|/question/delete/${question.id}|}"
                                class="delete btn btn-sm btn-outline-secondary"
                                sec:authorize="isAuthenticated()"
                                th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
