@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
-import java.util.List;
 
 @RequestMapping("/question") // 접두어에 question을 따로 작성하지 않아도 된다.
 @Controller
@@ -27,8 +26,8 @@ public class QuestionController {
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-        Page<Question> paging = this.questionService.getList(page);
-        model.addAttribute("paging", paging);
+        Page<Question> paging = this.questionService.getList(page, null);
+           model.addAttribute("paging", paging);
 
         return "question_list";
     }
